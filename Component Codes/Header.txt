@@ -1,0 +1,146 @@
+ComponentDefinitions:
+  Header:
+    DefinitionType: CanvasComponent
+    CustomProperties:
+      BackgroundColor:
+        PropertyKind: Input
+        DisplayName: Background Color
+        Description: A custom property
+        DataType: Color
+      BorderRadius:
+        PropertyKind: Input
+        DisplayName: BorderRadius
+        Description: A custom property
+        DataType: Number
+      BorderShadow:
+        PropertyKind: Input
+        DisplayName: BorderShadow
+        Description: A custom property
+        DataType: Text
+      Color:
+        PropertyKind: Input
+        DisplayName: Color
+        Description: A custom property
+        DataType: Color
+      CompactSideNav:
+        PropertyKind: Input
+        DisplayName: CompactSideNav
+        Description: A custom property
+        DataType: Boolean
+      Gradient:
+        PropertyKind: Input
+        DisplayName: Gradient
+        Description: A custom property
+        DataType: Boolean
+      GradientStyle:
+        PropertyKind: Input
+        DisplayName: GradientStyle
+        Description: A custom property
+        DataType: Text
+      HeaderLabel:
+        PropertyKind: Input
+        DisplayName: HeaderLabel
+        Description: A custom property
+        DataType: Text
+      Logo:
+        PropertyKind: Input
+        DisplayName: Logo
+        Description: A custom property
+        DataType: Image
+      LogoVisible:
+        PropertyKind: Input
+        DisplayName: LogoVisible
+        Description: A custom property
+        DataType: Boolean
+      MenuOutput:
+        PropertyKind: Output
+        DisplayName: MenuOutput
+        Description: A custom property
+        DataType: Boolean
+    Properties:
+      Fill: =RGBA(0,0,0,0)
+      Height: =80
+      Width: =App.Width
+    Children:
+      - HtmlText1:
+          Control: HtmlViewer@2.1.0
+          Properties:
+            Fill: =RGBA(0, 0, 0, 0)
+            Font: =Font.'Open Sans'
+            Height: =Parent.Height
+            HtmlText: =Header.GradientStyle
+            Visible: =Header.Gradient
+            Width: =Parent.Width
+      - Container4:
+          Control: GroupContainer@1.3.0
+          Variant: AutoLayout
+          Properties:
+            DropShadow: =Header.BorderShadow
+            Fill: =If(Header.Gradient,RGBA(0,0,0,0),Header.BackgroundColor)
+            Height: =Parent.Height
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Horizontal
+            LayoutGap: =10
+            PaddingBottom: =15
+            PaddingLeft: =20
+            PaddingRight: =20
+            PaddingTop: =15
+            RadiusBottomLeft: =If(Header.CompactSideNav,0,Header.BorderRadius)
+            RadiusBottomRight: =Header.BorderRadius
+            RadiusTopLeft: =Header.BorderRadius
+            RadiusTopRight: =Header.BorderRadius
+            Width: =Parent.Width
+          Children:
+            - Icon2:
+                Control: Classic/Icon@2.5.0
+                Properties:
+                  AlignInContainer: =AlignInContainer.Stretch
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Color: =Header.Color
+                  Height: =0
+                  Icon: =Icon.Waffle
+                  LayoutMinHeight: =0
+                  OnSelect: =Set(varMenuBool,!varMenuBool)
+                  PaddingBottom: =8
+                  PaddingLeft: =8
+                  PaddingRight: =8
+                  PaddingTop: =8
+                  Width: =Self.Height
+            - Image3:
+                Control: Image@2.2.3
+                Properties:
+                  AlignInContainer: =AlignInContainer.Stretch
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Image: =Header.Logo
+                  LayoutMinHeight: =0
+                  PaddingBottom: =5
+                  PaddingLeft: =5
+                  PaddingRight: =5
+                  PaddingTop: =5
+                  Visible: =Header.LogoVisible
+                  Width: =Self.Height
+            - Label2:
+                Control: Label@2.5.1
+                Properties:
+                  Align: =Align.Center
+                  AutoHeight: =true
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Color: =Header.Color
+                  FillPortions: =1
+                  Font: =Font.'Open Sans'
+                  FontWeight: =FontWeight.Semibold
+                  Size: =22
+                  Text: =Header.HeaderLabel
+            - Image4:
+                Control: Image@2.2.3
+                Properties:
+                  AlignInContainer: =AlignInContainer.Center
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Height: =Parent.Height-35
+                  Image: =User().Image
+                  LayoutMinHeight: =0
+                  RadiusBottomLeft: =100
+                  RadiusBottomRight: =100
+                  RadiusTopLeft: =100
+                  RadiusTopRight: =100
+                  Width: =Self.Height
