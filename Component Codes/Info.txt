@@ -1,0 +1,1 @@
+All the code that is compatible with the paste code option in Power Apps are given here.
