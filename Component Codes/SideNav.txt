@@ -1,0 +1,164 @@
+ComponentDefinitions:
+  SideNav:
+    DefinitionType: CanvasComponent
+    CustomProperties:
+      BackgroundColor:
+        PropertyKind: Input
+        DisplayName: Background Color
+        Description: A custom property
+        DataType: Color
+      BorderRadius:
+        PropertyKind: Input
+        DisplayName: Border Radius
+        Description: A custom property
+        DataType: Number
+      BorderShadow:
+        PropertyKind: Input
+        DisplayName: Border Shadow
+        Description: A custom property
+        DataType: Text
+      CompactView:
+        PropertyKind: Input
+        DisplayName: Compact View
+        Description: A custom property
+        DataType: Boolean
+      NavButtons:
+        PropertyKind: Input
+        DisplayName: Nav Buttons
+        Description: A custom property
+        DataType: Table
+      UserInfo:
+        PropertyKind: Input
+        DisplayName: UserInfo
+        Description: A custom property
+        DataType: Boolean
+    Properties:
+      Height: =App.Height
+      Width: =If(SideNav.CompactView,80,300)
+    Children:
+      - Container6:
+          Control: GroupContainer@1.3.0
+          Variant: AutoLayout
+          Properties:
+            DropShadow: =SideNav.BorderShadow
+            Fill: =SideNav.BackgroundColor
+            Height: =Parent.Height
+            LayoutDirection: =LayoutDirection.Vertical
+            RadiusBottomLeft: =SideNav.BorderRadius
+            RadiusBottomRight: =SideNav.BorderRadius
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Width: =Parent.Width
+          Children:
+            - Container10:
+                Control: GroupContainer@1.3.0
+                Variant: AutoLayout
+                Properties:
+                  FillPortions: =0
+                  Height: =If(SideNav.CompactView,100,200)
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutJustifyContent: =LayoutJustifyContent.Center
+                  LayoutMinWidth: =0
+                  Visible: =SideNav.UserInfo
+                Children:
+                  - Avatar1:
+                      Control: Avatar@1.0.40
+                      Properties:
+                        Height: =If(SideNav.CompactView,50,70)
+                        Width: =Self.Height
+                  - Label3:
+                      Control: Label@2.5.1
+                      Properties:
+                        Align: =Align.Center
+                        AlignInContainer: =AlignInContainer.Stretch
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Color: =RGBA(255, 255, 255, 1)
+                        Font: =Font.'Open Sans'
+                        FontWeight: =FontWeight.Semibold
+                        Size: =14
+                        Text: ="User Name"//User().FullName
+                        Visible: =!SideNav.CompactView
+            - Container8:
+                Control: GroupContainer@1.3.0
+                Variant: AutoLayout
+                Properties:
+                  Fill: =ColorFade(SideNav.BackgroundColor,10%)
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutMinWidth: =0
+                  PaddingLeft: =If(SideNav.CompactView,5,10)
+                  PaddingRight: =If(SideNav.CompactView,5,10)
+                  PaddingTop: =If(SideNav.CompactView,10,15)
+                  RadiusTopLeft: =50
+                  RadiusTopRight: =50
+                Children:
+                  - Gallery1:
+                      Control: Gallery@2.15.0
+                      Variant: Vertical
+                      Properties:
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        Items: =SideNav.NavButtons
+                        LayoutMinWidth: =0
+                        ShowScrollbar: =false
+                        TemplatePadding: =If(SideNav.CompactView,10,20)
+                        TemplateSize: =40
+                        Transition: =Transition.Push
+                      Children:
+                        - Container9:
+                            Control: GroupContainer@1.3.0
+                            Variant: ManualLayout
+                            Properties:
+                              Height: =Parent.TemplateHeight
+                              PaddingLeft: =10
+                              PaddingRight: =10
+                              RadiusBottomLeft: =ThisItem.BorderRadius
+                              RadiusBottomRight: =ThisItem.BorderRadius
+                              RadiusTopLeft: =ThisItem.BorderRadius
+                              RadiusTopRight: =ThisItem.BorderRadius
+                              Width: =If(SideNav.CompactView,Parent.TemplateWidth-10,Parent.TemplateWidth)
+                              X: =If(SideNav.CompactView,5,0)
+                            Children:
+                              - Button2:
+                                  Control: Classic/Button@2.2.0
+                                  Properties:
+                                    Align: =Align.Left
+                                    BorderColor: =ThisItem.BorderColor
+                                    BorderStyle: =ThisItem.BorderStyle
+                                    Color: =ThisItem.TextColor
+                                    DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                                    Fill: =ThisItem.FillColor
+                                    Font: =Font.'Open Sans'
+                                    Height: =Parent.Height
+                                    HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                                    HoverColor: =RGBA(255, 255, 255, 1)
+                                    HoverFill: =ColorFade(Self.Fill, -20%)
+                                    OnSelect: =Navigate(ThisItem.NavScreen,ScreenTransition.Fade)
+                                    PaddingLeft: =Icon1.Width+Icon1.X
+                                    PressedBorderColor: =Self.Fill
+                                    PressedColor: =Self.Fill
+                                    PressedFill: =Self.Color
+                                    RadiusBottomLeft: =ThisItem.BorderRadius
+                                    RadiusBottomRight: =ThisItem.BorderRadius
+                                    RadiusTopLeft: =ThisItem.BorderRadius
+                                    RadiusTopRight: =ThisItem.BorderRadius
+                                    Size: =12
+                                    Text: =ThisItem.Label
+                                    Visible: =!SideNav.CompactView
+                                    Width: =Parent.Width
+                              - Icon1:
+                                  Control: Classic/Icon@2.5.0
+                                  Properties:
+                                    BorderColor: =RGBA(0, 18, 107, 1)
+                                    BorderStyle: =BorderStyle.None
+                                    Color: =ThisItem.TextColor //If(SideNav.CompactView,Color.White,ThisItem.TextColor)
+                                    Fill: =If(SideNav.CompactView,ThisItem.FillColor,RGBA(0,0,0,0))
+                                    Height: =Parent.Height
+                                    HoverFill: =ColorFade(Self.Fill, -20%)
+                                    Icon: =ThisItem.ClassicIcon
+                                    OnSelect: =Navigate(ThisItem.NavScreen,ScreenTransition.Fade)
+                                    PaddingBottom: =If(SideNav.CompactView,8,10)
+                                    PaddingLeft: =If(SideNav.CompactView,8,10)
+                                    PaddingRight: =If(SideNav.CompactView,8,10)
+                                    PaddingTop: =If(SideNav.CompactView,8,10)
+                                    Width: =If(SideNav.CompactView,Parent.Width,Self.Height)
+                                    X: =If(SideNav.CompactView,0,4)
