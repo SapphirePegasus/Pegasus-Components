@@ -1,1 +1,2 @@
 All power apps .msapp files are listed here.
+You can download any component by clicking the download button.
